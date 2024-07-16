@@ -28,6 +28,11 @@ const Footer = () => {
       img: '/img/github.png',
     },
     {
+      name: 'Gmail',
+      link: 'https://mail.google.com/mail/?view=cm&fs=1&to=amarcetic04@gmail.com',
+      img: '/img/gmail.png',
+    },
+    {
       name: 'LinkedIn',
       link: 'https://www.linkedin.com/in/aleksandar-marcetic-b47483202/',
       img: '/img/linkedin.png',

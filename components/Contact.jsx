@@ -47,45 +47,58 @@ const Contact = () => {
             Get in<span className="text-orange-400"> Touch.</span>
           </h3>
           <p className="text-lg text-black/85 max-w-[500px]">
-            We're excited to connect with you! Whether you have questions about
-            our services or want to discuss a potential project, we're here to
-            help. Reach out to us using the contact form or contact details
-            below.
+            I would love to hear from you! Whether you have a question about my
+            projects, want to collaborate, or just want to say hi, feel free to
+            reach out. Use the contact form or connect with me through my social
+            media channels.
           </p>
           <div className="w-full flex flex-col mt-10 gap-5 text-lg">
-            <div className="w-full flex ">
+            <a
+              href="https://github.com/CojaDev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full flex items-center"
+            >
               <Image
-                src="/img/pin.png"
-                alt="pin"
+                src="/img/github2.png"
+                alt="GitHub"
                 draggable={false}
                 height={512}
                 width={512}
-                className="w-10 object-cover mr-4 select-none "
+                className="w-10 object-cover mr-4 select-none"
               />
-              <p className="text-orange-400">Serbia</p>
-            </div>
-            <div className="w-full flex ">
+              <p className="text-orange-400">CojaDev</p>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/aleksandar-marcetic-b47483202/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full flex items-center"
+            >
               <Image
-                src="/img/phone2.png"
-                alt="phone"
+                src="/img/linkedin2.png"
+                alt="LinkedIn"
                 draggable={false}
                 height={512}
                 width={512}
-                className="w-10 object-cover mr-4 select-none "
+                className="w-10 object-cover mr-4 select-none"
               />
-              <p className="text-orange-400">+381 61 512 0204</p>
-            </div>
-            <div className="w-full flex ">
+              <p className="text-orange-400">Aleksandar Marcetic</p>
+            </a>
+            <a
+              href="mailto:amarcetic04@gmail.com"
+              className="w-full flex items-center"
+            >
               <Image
                 src="/img/mail.png"
                 alt="email"
                 height={512}
                 draggable={false}
                 width={512}
-                className="w-10 object-cover mr-4 select-none "
+                className="w-10 object-cover mr-4 select-none"
               />
               <p className="text-orange-400">amarcetic04@gmail.com</p>
-            </div>
+            </a>
           </div>
         </div>
         <form

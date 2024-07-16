@@ -27,15 +27,16 @@ const LoadingScreen = () => {
 
   return (
     <div
-      className={`fixed top-0 left-0 z-[150] w-screen h-screen bg-[#111] flex items-center justify-center transition-opacity duration-500 ${
+      className={`fixed top-0 left-0 z-[150] w-screen h-screen bg-[#111] flex flex-col gap-6 text-white items-center justify-center transition-opacity duration-500 ${
         fadeOut ? 'opacity-0' : 'opacity-100'
       }`}
     >
       <div className="video-bg select-none !opacity-[0.09]" />
-      <div className="spinner">
+      <div className="spinner ">
         <div className="double-bounce1"></div>
         <div className="double-bounce2"></div>
       </div>
+      <h2 className="text-3xl ml-3">Loading...</h2>
     </div>
   );
 };
