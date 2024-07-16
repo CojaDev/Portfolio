@@ -3,9 +3,9 @@
 ![Portfolio](Screenshot.png)
 
 <p>
-  <img src="Screenshot_2.png" alt="Screenshot 2" width="170">
-  <img src="Screenshot_3.png" alt="Screenshot 3" width="170">
-  <img src="Screenshot_4.png" alt="Screenshot 4" width="170">
+  <img src="Screenshot_2.png" alt="Screenshot 2" width="270">
+  <img src="Screenshot_3.png" alt="Screenshot 3" width="270">
+  <img src="Screenshot_4.png" alt="Screenshot 4" width="270">
 </p>
 
 ## Overview
