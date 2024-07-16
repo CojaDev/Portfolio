@@ -119,7 +119,9 @@ const About = () => {
         }
       );
     }, sectionRef);
-  }, [gsap]);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section

@@ -12,7 +12,7 @@ const LoadingScreen = () => {
       setTimeout(() => {
         setShowLoading(false);
       }, 500); // This duration should match the CSS transition duration
-    }, 50);
+    }, 1500);
   }, []);
 
   useEffect(() => {
