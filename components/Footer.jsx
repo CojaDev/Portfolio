@@ -42,9 +42,6 @@ const Footer = () => {
   return (
     <footer className=" select-none overflow-hidden w-screen flex flex-col justify-center items-center border-t border-gray-500/10 shadow-lg gap-10 bg-gradient-to-r from-[#111]/70 via-gray-800/70 to-[#111]/70 py-10 mt-10">
       <div className="flex flex-col items-center gap-10">
-        <h2 className="text-5xl text-white font-bold">
-          <span className="text-orange-300">Aleksandar</span> M.
-        </h2>
         <div className="flex gap-6 justify-center">
           {socials.map((social, index) => (
             <a
@@ -59,14 +56,14 @@ const Footer = () => {
               <Image
                 src={social.img}
                 alt={social.name}
-                width={40}
-                height={40}
+                width={50}
+                height={50}
                 className="rounded-full"
               />
             </a>
           ))}
         </div>
-        <div className="flex gap-6 justify-center text-white text-lg">
+        <div className="flex gap-6 justify-center text-white sm:text-lg text-base">
           {links.map((link, index) => (
             <button
               aria-label={link.name}
@@ -81,7 +78,7 @@ const Footer = () => {
           ))}
         </div>
       </div>
-      <p className="text-center select-none text-lg text-white opacity-80">
+      <p className="text-center select-none sm:text-lg text-base text-white opacity-80">
         ©2024 Aleksandar M. | All Rights Reserved
       </p>
     </footer>
