@@ -6,7 +6,6 @@ import About from '@/components/About';
 import Portfolio from '@/components/Portfolio';
 import MyStars from '@/components/Stars';
 import Contact from '@/components/Contact';
-import Footer from '@/components/Footer';
 import LoadingScreen from '@/components/LoadingScreen';
 
 export default function Home() {
