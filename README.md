@@ -33,7 +33,7 @@ Welcome to my portfolio! This project is a web-based portfolio designed to showc
 
 ## Demo
 
-You can see a live demo of this portfolio [here](https://cojadev.github.io/Portfolio).
+You can see a live demo of this portfolio [here](https://portfolio-coja.vercel.app/).
 
 ## Usage
 

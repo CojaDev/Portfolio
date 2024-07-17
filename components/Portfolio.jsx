@@ -180,6 +180,7 @@ export default function Portfolio() {
                           className="w-full h-full select-none"
                           width={1080}
                           height={1920}
+                          title={project.title}
                           style={{ border: 'none' }}
                         ></iframe>
                       </Monitor>
