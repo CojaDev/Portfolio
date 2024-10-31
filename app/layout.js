@@ -1,12 +1,15 @@
-import { Poppins } from 'next/font/google';
-import './globals.css';
-import Footer from '@/components/Footer';
+import { Poppins } from "next/font/google";
+import "./globals.css";
+import Footer from "@/components/Footer";
 
-const popins = Poppins({ subsets: ['latin'], weight: '400' });
+const popins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata = {
-  title: 'Portfolio',
-  description: 'Portfolio made by CojaDev using NextJs',
+  title: "Portfolio",
+  description: "Portfolio made by CojaDev using NextJs",
 };
 
 export default function RootLayout({ children }) {

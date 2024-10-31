@@ -1,9 +1,9 @@
-'use client';
-import { useState } from 'react';
-import emailjs from '@emailjs/browser';
-import Image from 'next/image';
-import toast, { Toaster } from 'react-hot-toast';
-import MyStars from './Stars';
+"use client";
+import { useState } from "react";
+import emailjs from "@emailjs/browser";
+import Image from "next/image";
+import toast, { Toaster } from "react-hot-toast";
+import MyStars from "./Stars";
 const Contact = () => {
   const [emailSent, setEmailSent] = useState(false);
 
@@ -12,10 +12,10 @@ const Contact = () => {
 
     emailjs
       .sendForm(
-        'service_6tdaeep',
-        'template_zmmvyfb',
+        "service_6tdaeep",
+        "template_zmmvyfb",
         e.target,
-        'qyKCjoIKW0Re6ObrA'
+        "qyKCjoIKW0Re6ObrA"
       )
       .then((res) => {
         console.log(res);
@@ -24,21 +24,19 @@ const Contact = () => {
           setEmailSent(false);
         }, 5000);
         setTimeout(() => {
-          toast.success('Email is succesfully sent!!');
+          toast.success("Email is succesfully sent!!");
         }, 1000);
       });
   };
 
   return (
     <section
-      className="w-full min-h-screen flex  py-96"
+      className="w-full min-h-screen flex my-72 py-32"
       data-scroll
       data-scroll-speed="0.2"
+      id="contact"
     >
-      <div
-        className="max-w-screen-2xl mx-auto w-full flex bg-white/95 sm:flex-row z-10 flex-col md:p-24 p-2 pt-3 pb-8  rounded-3xl relative"
-        id="contact"
-      >
+      <div className="max-w-screen-2xl mx-auto scale-95 w-full flex bg-white/95 sm:flex-row z-10 flex-col md:p-24 p-2 pt-3 pb-8  rounded-3xl relative">
         <div className="w-full h-full absolute bottom-0 left-0 -z-50 pointer-events-none  select-none invert">
           <MyStars count={2800} radius={120} speed={0.7} scale={0.7} />
         </div>
@@ -104,7 +102,7 @@ const Contact = () => {
         <form
           onSubmit={EmailSubmit}
           className={`flex w-full bg-white text-black flex-col max-w-screen-sm ml-auto gap-6 p-10 px-8 shadow-xl rounded-b-2xl rounded-t-lg border transition-all ${
-            emailSent ? 'border-green-500 border-2 bg-green-50' : 'border-black'
+            emailSent ? "border-green-500 border-2 bg-green-50" : "border-black"
           }`}
         >
           <input
@@ -113,8 +111,8 @@ const Contact = () => {
             placeholder="Your Name"
             className={`p-2 border transition-all delay-75 focus:outline-orange-400/90 rounded-[4px] focus:shadow-md ${
               emailSent
-                ? 'border-green-500 focus:outline-green-400/90 '
-                : 'border-black focus:outline-orange-400/90 '
+                ? "border-green-500 focus:outline-green-400/90 "
+                : "border-black focus:outline-orange-400/90 "
             }`}
             required
           />
@@ -125,8 +123,8 @@ const Contact = () => {
             placeholder="Your Email Address"
             className={`p-2 border transition-all delay-75 focus:outline-orange-400/90 focus:shadow-md rounded-[4px] ${
               emailSent
-                ? 'border-green-500 focus:outline-green-400/90 '
-                : 'border-black focus:outline-orange-400/90 '
+                ? "border-green-500 focus:outline-green-400/90 "
+                : "border-black focus:outline-orange-400/90 "
             }`}
             required
           />
@@ -136,8 +134,8 @@ const Contact = () => {
             placeholder="What is it about?"
             className={`p-2 border transition-all delay-75 focus:outline-orange-400/90 rounded-[4px] focus:shadow-md ${
               emailSent
-                ? 'border-green-500 focus:outline-green-400/90 '
-                : 'border-black focus:outline-orange-400/90 '
+                ? "border-green-500 focus:outline-green-400/90 "
+                : "border-black focus:outline-orange-400/90 "
             }`}
             required
           />
@@ -147,8 +145,8 @@ const Contact = () => {
             name="poruka"
             className={`p-2 border  transition-shadow delay-75 min-h-[150px] max-h-[280px] focus:outline-orange-400/90 focus:shadow-md rounded-[4px] ${
               emailSent
-                ? 'border-green-500 focus:outline-green-400/90 '
-                : 'border-black focus:outline-orange-400/90 '
+                ? "border-green-500 focus:outline-green-400/90 "
+                : "border-black focus:outline-orange-400/90 "
             }`}
             required
           />
@@ -157,8 +155,8 @@ const Contact = () => {
             type="submit"
             className={`p-2 border transition-all delay-75  cursor-pointer active:scale-[0.98] font-medium rounded-[4px] ${
               emailSent
-                ? 'border-green-500 bg-green-500 hover:bg-green-400/80'
-                : 'border-black bg-orange-400 hover:bg-orange-400/80'
+                ? "border-green-500 bg-green-500 hover:bg-green-400/80"
+                : "border-black bg-orange-400 hover:bg-orange-400/80"
             }`}
           >
             Send Message

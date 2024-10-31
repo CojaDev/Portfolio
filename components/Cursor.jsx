@@ -1,5 +1,5 @@
-'use client';
-import React, { useState, useEffect, useRef } from 'react';
+"use client";
+import React, { useState, useEffect, useRef } from "react";
 
 const throttle = (fn, wait) => {
   let inThrottle, lastFn, lastTime;
@@ -23,20 +23,22 @@ const throttle = (fn, wait) => {
 };
 
 const Cursor = ({ color }) => {
-  const [bg, setBG] = useState('transparent');
+  const [bg, setBG] = useState("transparent");
   const [isClicked, setIsClicked] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
   const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
     (async () => {
-      const LocomotiveScroll = (await import('locomotive-scroll')).default;
+      const LocomotiveScroll = (await import("locomotive-scroll")).default;
 
       const locomotiveScroll = new LocomotiveScroll();
     })();
   }, []);
   const updateMousePosition = (ev) => {
-    setMousePosition({ x: ev.clientX, y: ev.clientY });
+    setTimeout(() => {
+      setMousePosition({ x: ev.clientX, y: ev.clientY });
+    }, 76);
   };
 
   const updateScrollPosition = () => {
@@ -55,54 +57,54 @@ const Cursor = ({ color }) => {
   };
 
   useEffect(() => {
-    window.addEventListener('mousemove', throttledMouseMove);
-    window.addEventListener('scroll', throttledScroll);
-    window.addEventListener('mousedown', handleMouseDown);
-    window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener("mousemove", throttledMouseMove);
+    window.addEventListener("scroll", throttledScroll);
+    window.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mouseup", handleMouseUp);
 
-    const buttons = document.querySelectorAll('button');
-    const links = document.querySelectorAll('a');
-    const inputs = document.querySelectorAll('input');
-    const textAreas = document.querySelectorAll('textarea');
+    const buttons = document.querySelectorAll("button");
+    const links = document.querySelectorAll("a");
+    const inputs = document.querySelectorAll("input");
+    const textAreas = document.querySelectorAll("textarea");
 
     buttons.forEach((button) => {
-      button.addEventListener('mouseenter', handleMouseDown);
-      button.addEventListener('mouseleave', handleMouseUp);
+      button.addEventListener("mouseenter", handleMouseDown);
+      button.addEventListener("mouseleave", handleMouseUp);
     });
     links.forEach((link) => {
-      link.addEventListener('mouseenter', handleMouseDown);
-      link.addEventListener('mouseleave', handleMouseUp);
+      link.addEventListener("mouseenter", handleMouseDown);
+      link.addEventListener("mouseleave", handleMouseUp);
     });
     inputs.forEach((input) => {
-      input.addEventListener('mouseenter', handleMouseDown);
-      input.addEventListener('mouseleave', handleMouseUp);
+      input.addEventListener("mouseenter", handleMouseDown);
+      input.addEventListener("mouseleave", handleMouseUp);
     });
     textAreas.forEach((textArea) => {
-      textArea.addEventListener('mouseenter', handleMouseDown);
-      textArea.addEventListener('mouseleave', handleMouseUp);
+      textArea.addEventListener("mouseenter", handleMouseDown);
+      textArea.addEventListener("mouseleave", handleMouseUp);
     });
 
     return () => {
-      window.removeEventListener('mousemove', throttledMouseMove);
-      window.removeEventListener('scroll', throttledScroll);
-      window.removeEventListener('mousedown', handleMouseDown);
-      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener("mousemove", throttledMouseMove);
+      window.removeEventListener("scroll", throttledScroll);
+      window.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mouseup", handleMouseUp);
 
       buttons.forEach((button) => {
-        button.removeEventListener('mouseenter', handleMouseDown);
-        button.removeEventListener('mouseleave', handleMouseUp);
+        button.removeEventListener("mouseenter", handleMouseDown);
+        button.removeEventListener("mouseleave", handleMouseUp);
       });
       links.forEach((link) => {
-        link.removeEventListener('mouseenter', handleMouseDown);
-        link.removeEventListener('mouseleave', handleMouseUp);
+        link.removeEventListener("mouseenter", handleMouseDown);
+        link.removeEventListener("mouseleave", handleMouseUp);
       });
       inputs.forEach((input) => {
-        input.removeEventListener('mouseenter', handleMouseDown);
-        input.removeEventListener('mouseleave', handleMouseUp);
+        input.removeEventListener("mouseenter", handleMouseDown);
+        input.removeEventListener("mouseleave", handleMouseUp);
       });
       textAreas.forEach((textArea) => {
-        textArea.removeEventListener('mouseenter', handleMouseDown);
-        textArea.removeEventListener('mouseleave', handleMouseUp);
+        textArea.removeEventListener("mouseenter", handleMouseDown);
+        textArea.removeEventListener("mouseleave", handleMouseUp);
       });
     };
   }, [throttledMouseMove, throttledScroll]);
@@ -111,7 +113,7 @@ const Cursor = ({ color }) => {
     top: `${mousePosition.y + scrollPosition}px`,
     left: `${mousePosition.x}px`,
     transform: `translate(-50%, -50%)`, // Center the cursor
-    borderColor: `${isClicked ? 'transparent' : color}`,
+    borderColor: `${isClicked ? "transparent" : color}`,
     zIndex: 100,
   };
 
@@ -122,7 +124,7 @@ const Cursor = ({ color }) => {
     >
       <div
         className={`w-full h-full rounded-full transition-all border-2  ${
-          isClicked ? 'animate-fill' : 'animate-unfill'
+          isClicked ? "animate-fill" : "animate-unfill"
         }`}
         style={{ scale: 2, borderColor: color, backgroundColor: color }}
       ></div>

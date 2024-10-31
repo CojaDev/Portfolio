@@ -1,213 +1,97 @@
-'use client';
-import React, { useRef, useEffect } from 'react';
+"use client";
+import React from "react";
+import Image from "next/image";
 import {
   FaReact,
+  FaNodeJs,
   FaHtml5,
   FaCss3Alt,
   FaJsSquare,
-  FaBootstrap,
-  FaSass,
-} from 'react-icons/fa';
+} from "react-icons/fa";
 import {
   SiNextdotjs,
-  SiThreedotjs,
   SiTailwindcss,
   SiMongodb,
-} from 'react-icons/si';
-import { TbBrandReactNative } from 'react-icons/tb';
-import Image from 'next/image';
+  SiTypescript,
+  SiThreedotjs,
+} from "react-icons/si";
+
+const SkillIcon = ({ Icon, name }) => (
+  <div className="flex flex-col items-center">
+    <Icon className="text-4xl text-orange-300 mb-2" />
+    <span className=" text-gray-200">{name}</span>
+  </div>
+);
 
 const About = () => {
-  const sectionRef = useRef(null);
-  const boxRef = useRef(null);
-  const buttonRef = useRef(null);
-  const leftsRef = useRef(null);
-  const rightsRef = useRef(null);
-
-  useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-    };
-
-    const handleIntersection = (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('translate-up');
-          observer.unobserve(entry.target);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(
-      handleIntersection,
-      observerOptions
-    );
-
-    const elements = [boxRef.current, buttonRef.current];
-    elements.forEach((element) => {
-      if (element) {
-        observer.observe(element);
-      }
-    });
-
-    const handleLeftsIntersection = (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('translate-left');
-          observer.unobserve(entry.target);
-        }
-      });
-    };
-
-    const leftsObserver = new IntersectionObserver(
-      handleLeftsIntersection,
-      observerOptions
-    );
-
-    if (leftsRef.current) {
-      leftsObserver.observe(leftsRef.current);
-    }
-
-    const handleRightsIntersection = (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('translate-right');
-          observer.unobserve(entry.target);
-        }
-      });
-    };
-
-    const rightsObserver = new IntersectionObserver(
-      handleRightsIntersection,
-      observerOptions
-    );
-
-    if (rightsRef.current) {
-      rightsObserver.observe(rightsRef.current);
-    }
-
-    return () => {
-      elements.forEach((element) => {
-        if (element) {
-          observer.unobserve(element);
-        }
-      });
-      if (leftsRef.current) {
-        leftsObserver.unobserve(leftsRef.current);
-      }
-      if (rightsRef.current) {
-        rightsObserver.unobserve(rightsRef.current);
-      }
-    };
-  }, []);
-
   return (
-    <section
-      ref={sectionRef}
-      id="about"
-      className="section h-full w-screen xl:p-8 p-4 text-white relative flex flex-col items-center mt-10 overflow-x-hidden transition-all"
-    >
-      <div ref={boxRef} className="box text-center mb-8 transition-all">
-        <h2 className="text-5xl md:text-8xl text-orange-300">
-          Crafting Digital Experiences
+    <section id="about" className="w-full py-20 px-4 md:px-8">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-5xl md:text-6xl font-bold md:ml-12 md:text-left text-center  text-white mb-12">
+          About <span className="text-orange-300">Me</span>
         </h2>
-        <p className="text-xl mt-4">
-          Creating immersive web experiences with a focus on performance and
-          user engagement.
-        </p>
-        <p className="text-xl mt-4">
-          From responsive design to server-side logic, I've got you covered.
-        </p>
-      </div>
 
-      <div
-        ref={leftsRef}
-        className="lefts mb-16 mt-6 flex items-center text-orange-300 select-none justify-center sm:text-[20rem] text-[10rem] h-80 transition-all"
-      >
-        <p className="">{'<'}</p>
-        <Image
-          width={1080}
-          height={1437}
-          src="/img/me.jpg"
-          draggable="false"
-          alt="Aleksandar Marcetic"
-          className="w-72 h-72 object-cover rounded-md"
-          loading="lazy"
-        />
-        <p className="">{'>'}</p>
-      </div>
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-12">
+          <div className="w-full md:w-1/3 flex items-center">
+            <p className="text-orange-300 lg:text-9xl md:text-7xl text-9xl transition-all">
+              {"<"}
+            </p>
+            <div className="relative w-64 h-64 mx-auto overflow-hidden rounded-full border-4 border-orange-300">
+              <Image
+                src="/img/me.jpg"
+                alt="Aleksandar Marcetic"
+                layout="fill"
+                objectFit="cover"
+              />
+            </div>
+            <p className="text-orange-300 lg:text-9xl md:text-7xl text-9xl transition-all">
+              {">"}
+            </p>
+          </div>
 
-      <div
-        ref={rightsRef}
-        className="rights w-full flex flex-col items-center mb-8 transition-all"
-      >
-        <h3 className="text-3xl mb-4">Technologies I Use</h3>
-        <div className="flex flex-wrap justify-center mb-4 sm:max-w-[1100px]">
-          <div className="flex items-center m-4">
-            <FaHtml5 className="text-orange-600 text-5xl" />
-            <span className="ml-2 text-xl">HTML5</span>
+          <div className="w-full md:w-2/3 space-y-4">
+            <h3 className="text-3xl font-semibold text-white">
+              Full-Stack Developer & Software Developer
+            </h3>
+            <p className="text-gray-200">
+              Hi, I'm Aleksandar Marcetic, a passionate developer focused on
+              creating seamless and engaging user experiences. I specialize in
+              building responsive, high-performance web applications that
+              combine great design with intuitive functionality.
+            </p>
+            <p className="text-gray-200">
+              My expertise spans both front-end and back-end technologies,
+              allowing me to deliver comprehensive solutions that meet modern
+              web development standards.
+            </p>
+            <a
+              href="/cv/cv_Aleksandar_Marcetic.pdf"
+              download
+              className="inline-block px-6 py-3 bg-orange-300 text-black font-semibold rounded-full hover:bg-orange-300/85 transition-colors"
+            >
+              Download CV
+            </a>
           </div>
-          <div className="flex items-center m-4">
-            <FaCss3Alt className="text-blue-600 text-5xl" />
-            <span className="ml-2 text-xl">CSS3</span>
-          </div>
-          <div className="flex items-center m-4">
-            <FaJsSquare className="text-yellow-500 text-5xl" />
-            <span className="ml-2 text-xl">JavaScript</span>
-          </div>
-          <div className="flex items-center m-4">
-            <FaBootstrap className="text-purple-600 text-5xl" />
-            <span className="ml-2 text-xl">Bootstrap 5</span>
-          </div>
-          <div className="flex items-center m-4">
-            <FaSass className="text-pink-500 text-5xl" />
-            <span className="ml-2 text-xl">Sass</span>
-          </div>
-          <div className="flex items-center m-4">
-            <FaReact className="text-blue-500 text-5xl" />
-            <span className="ml-2 text-xl">React</span>
-          </div>
-          <div className="flex items-center m-4">
-            <SiNextdotjs className="text-black text-5xl invert" />
-            <span className="ml-2 text-xl">Next.js</span>
-          </div>
-          <div className="flex items-center m-4">
-            <SiThreedotjs className="text-green-500 text-5xl" />
-            <span className="ml-2 text-xl">Three.js</span>
-          </div>
-          <div className="flex items-center m-4">
-            <Image
-              width={48}
-              height={48}
-              src="/img/gsap.svg"
-              draggable="false"
-              alt="gsap"
-              className="max-w-[3rem] w-[3rem] h-[3.4rem]"
-            />
-            <span className="ml-2 text-xl">GSAP</span>
-          </div>
-          <div className="flex items-center m-4">
-            <SiTailwindcss className="text-blue-400 text-5xl" />
-            <span className="ml-2 text-xl">TailwindCSS</span>
-          </div>
-          <div className="flex items-center m-4">
-            <TbBrandReactNative className="text-white text-5xl" />
-            <span className="ml-2 text-xl">React Native</span>
-          </div>
-          <div className="flex items-center m-4">
-            <SiMongodb className="text-green-600 text-5xl" />
-            <span className="ml-2 text-xl">MongoDB</span>
+        </div>
+
+        <div className="mt-16 mb-16">
+          <h3 className="text-3xl font-semibold text-white mb-8 text-center">
+            My Skills
+          </h3>
+          <div className="w-[75%] grid grid-cols-3 md:grid-cols-5 gap-8 mx-auto ">
+            <SkillIcon Icon={FaJsSquare} name="JavaScript" />
+            <SkillIcon Icon={FaReact} name="React" />
+            <SkillIcon Icon={SiNextdotjs} name="Next.js" />
+            <SkillIcon Icon={FaNodeJs} name="Node.js" />
+            <SkillIcon Icon={FaHtml5} name="HTML5" />
+            <SkillIcon Icon={FaCss3Alt} name="CSS3" />
+            <SkillIcon Icon={SiTailwindcss} name="Tailwind CSS" />
+            <SkillIcon Icon={SiMongodb} name="MongoDB" />
+            <SkillIcon Icon={SiThreedotjs} name="Three.js" />
+            <SkillIcon Icon={SiTypescript} name="TypeScript" />
           </div>
         </div>
       </div>
-      <a
-        ref={buttonRef}
-        href="/cv/cv_Aleksandar_Marcetic.pdf"
-        download
-        className="border-2 border-orange-300 px-9 py-2.5 text-lg -mt-5 transition-all hover:bg-transparent bg-orange-300 hover:text-orange-300 text-black rounded-full"
-      >
-        Download CV
-      </a>
     </section>
   );
 };

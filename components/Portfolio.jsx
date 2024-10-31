@@ -1,11 +1,11 @@
-'use client';
-import React, { Suspense, useRef, useState, useEffect } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { ContactShadows } from '@react-three/drei';
-import Monitor from './Monitor';
-import { Phone } from './Phone';
-import { projects } from '../constants/projects';
-import Image from 'next/image';
+"use client";
+import React, { Suspense, useRef, useState, useEffect } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { ContactShadows } from "@react-three/drei";
+import Monitor from "./Monitor";
+import { Phone } from "./Phone";
+import { projects } from "../constants/projects";
+import Image from "next/image";
 import {
   FaReact,
   FaNodeJs,
@@ -15,7 +15,7 @@ import {
   FaBootstrap,
   FaSass,
   FaCcStripe,
-} from 'react-icons/fa';
+} from "react-icons/fa";
 import {
   SiNextdotjs,
   SiThreedotjs,
@@ -26,8 +26,8 @@ import {
   SiCloudinary,
   SiExpo,
   SiNextdns,
-} from 'react-icons/si';
-import { TbBrandReactNative } from 'react-icons/tb';
+} from "react-icons/si";
+import { TbBrandReactNative } from "react-icons/tb";
 
 const ICONS = {
   FaReact: <FaReact />,
@@ -50,29 +50,58 @@ const ICONS = {
   TbBrandReactNative: <TbBrandReactNative />,
 };
 
-export default function Portfolio() {
-  const sectionRef = useRef(null);
-  const canvasContainerRef = useRef(null);
-  const canvasRef = useRef(null);
+function Model({ children }) {
+  const group = useRef();
+  const { mouse } = useThree();
+  const [targetRotation, setTargetRotation] = useState([0, 0, 0]);
 
-  const [scrollSpeed, setScrollSpeed] = useState('-0.2');
-  const [scrollSpeed2, setScrollSpeed2] = useState('0.35');
+  useFrame(() => {
+    if (group.current) {
+      const speed = 0.05;
+      group.current.rotation.y +=
+        (targetRotation[1] - group.current.rotation.y) * speed;
+      group.current.rotation.x +=
+        (targetRotation[0] - group.current.rotation.x) * speed;
+    }
+  });
+
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      const { clientX, clientY } = event;
+      const { innerWidth, innerHeight } = window;
+      const x = (clientX / innerWidth) * 2 - 1;
+      const y = -(clientY / innerHeight) * 2 + 1;
+      setTargetRotation([y * -0.1, x * 0.1, 0]);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  return <group ref={group}>{children}</group>;
+}
+
+export default function Portfolio() {
+  const [scrollSpeed, setScrollSpeed] = useState("-0.2");
+  const [scrollSpeed2, setScrollSpeed2] = useState("0.35");
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 1280) {
-        setScrollSpeed('0');
-        setScrollSpeed2('0');
+        setScrollSpeed("0");
+        setScrollSpeed2("0");
       } else {
-        setScrollSpeed('-0.2');
-        setScrollSpeed2('0.35');
+        setScrollSpeed("-0.2");
+        setScrollSpeed2("0.35");
       }
     };
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Set initial value based on current window size
+    window.addEventListener("resize", handleResize);
+    handleResize();
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -80,7 +109,6 @@ export default function Portfolio() {
     <section
       id="works"
       className="relative w-screen min-h-screen flex gap-5 flex-col items-center"
-      ref={sectionRef}
     >
       {projects.map((project, index) => (
         <div
@@ -90,8 +118,8 @@ export default function Portfolio() {
           <div
             className={`xl:min-w-[40%] xl:w-[40%] w-full flex flex-col justify-center text-white p-6 ${
               index % 2 === 0
-                ? '2xl:pl-40 lg:pl-10 2xl:mr-0 lg:-mr-10'
-                : '2xl:pr-40 lg:pr-10 2xl:ml-0 lg:-ml-10'
+                ? "2xl:pl-40 lg:pl-10 2xl:mr-0 lg:-mr-10"
+                : "2xl:pr-40 lg:pr-10 2xl:ml-0 lg:-ml-10"
             } space-y-4`}
             data-scroll
             data-scroll-speed={scrollSpeed}
@@ -109,7 +137,7 @@ export default function Portfolio() {
               {project.technologies.map((tech, i) => (
                 <div key={i} className="flex items-center my-2 mr-3">
                   {React.cloneElement(ICONS[tech.icon], {
-                    className: `${tech.color} text-4xl`,
+                    className: `text-orange-300 text-4xl`,
                   })}
                   <span className="ml-2 text-xl">{tech.name}</span>
                 </div>
@@ -123,8 +151,8 @@ export default function Portfolio() {
                 className="px-6 py-3 bg-orange-400 text-black font-medium text-center rounded-lg hover:bg-orange-300 transition"
               >
                 {project.onlyMobile === true
-                  ? 'Visit GitHub Page'
-                  : 'Visit Site'}
+                  ? "Visit GitHub Page"
+                  : "Visit Site"}
               </a>
               {project.onlyMobile === false && (
                 <a
@@ -151,37 +179,37 @@ export default function Portfolio() {
                 height={757}
                 draggable={false}
                 alt={project.title}
-                className="w-[65%] h-full object-cover rounded-md"
+                className="w-[65%] my-10 h-full object-cover rounded-md"
               />
             </div>
           ) : (
             <>
               <div
-                className={`min-h-screen h-screen xl:w-[60%] w-full flex-1 xl:flex hidden justify-center items-center ${
+                className={`min-h-screen h-screen xl:max-w-[60%] w-full flex-1 xl:flex hidden justify-center items-center ${
                   index % 2 === 0
-                    ? '2xl:mr-0 lg:mr-10'
-                    : '2xl:ml-0 lg:ml-10 xl:order-first'
-                } ${index % 2 === 0 ? '' : ''}`}
-                ref={canvasContainerRef}
+                    ? "2xl:mr-0 lg:mr-10"
+                    : "2xl:ml-0 lg:ml-10 xl:order-first"
+                } ${index % 2 === 0 ? "" : ""}`}
                 data-scroll
                 data-scroll-speed={scrollSpeed2}
               >
                 <Canvas
-                  camera={{ position: [0, 0, 7], fov: 95 }}
-                  ref={canvasRef}
+                  gl={{ pixelRatio: 0.2 }}
+                  camera={{ position: [0, 0, 7], fov: 100 }}
                 >
                   <pointLight position={[10, 10, 10]} intensity={1.5} />
                   <ambientLight intensity={1.5} />
-                  <Suspense fallback={null}>
-                    <group position={[-2, -2.7, 0]}>
+
+                  <Model>
+                    <group position={[-2, -2.3, 0]}>
                       <Monitor>
                         <iframe
                           src={project.monitorUrl}
                           className="w-full h-full select-none"
-                          width={1080}
-                          height={1920}
+                          width={432}
+                          height={768}
                           title={project.title}
-                          style={{ border: 'none' }}
+                          style={{ border: "none" }}
                         ></iframe>
                       </Monitor>
                       <Phone
@@ -192,14 +220,15 @@ export default function Portfolio() {
                         <iframe
                           src={project.phoneUrl}
                           className="w-full h-full select-none overflow-hidden"
-                          width={1080}
-                          height={1920}
+                          width={432}
+                          height={768}
                           title={project.title}
-                          style={{ border: 'none' }}
+                          style={{ border: "none" }}
                         ></iframe>
                       </Phone>
                     </group>
-                  </Suspense>
+                  </Model>
+
                   <ContactShadows
                     position={[0, -3.5, 0]}
                     scale={20}
@@ -216,7 +245,7 @@ export default function Portfolio() {
                   height={757}
                   draggable={false}
                   alt={project.title}
-                  className="w-[65%] h-full object-cover rounded-md"
+                  className="w-[65%] h-full my-20 object-cover rounded-md"
                 />
               </div>
             </>

@@ -1,10 +1,10 @@
-'use client';
-import { Html, useGLTF } from '@react-three/drei';
-import React, { useRef } from 'react';
+"use client";
+import { Html, useGLTF } from "@react-three/drei";
+import React, { useRef } from "react";
 
 const Monitor = ({ children }) => {
   const group = useRef();
-  const { nodes, materials } = useGLTF('/models/monitor.glb');
+  const { nodes, materials } = useGLTF("/models/monitor.glb");
 
   return (
     <group dispose={null} ref={group}>
@@ -25,7 +25,7 @@ const Monitor = ({ children }) => {
             >
               <Html
                 className="content"
-                position={[0, 2.85, 0]}
+                position={[0, 3.75, 0]}
                 rotation={[0, Math.PI, 0]}
                 transform
                 distanceFactor={10.5}
@@ -34,10 +34,10 @@ const Monitor = ({ children }) => {
                   className="wrapper"
                   onPointerDown={(e) => e.stopPropagation()}
                   style={{
-                    width: '1732px',
-                    height: '1000px',
-                    transform: 'scale(0.4)',
-                    transformOrigin: 'top left',
+                    width: "1732px",
+                    height: "1000px",
+                    transform: "scale(0.4)",
+                    transformOrigin: "top left",
                   }}
                 >
                   {children}

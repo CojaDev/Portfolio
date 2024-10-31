@@ -1,7 +1,7 @@
-import { Html, useGLTF } from '@react-three/drei';
+import { Html, useGLTF } from "@react-three/drei";
 
 export function Phone({ children, ...props }) {
-  const { nodes, materials } = useGLTF('/models/phone1.glb');
+  const { nodes, materials } = useGLTF("/models/phone1.glb");
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -10,7 +10,7 @@ export function Phone({ children, ...props }) {
         geometry={nodes.Cube.geometry}
         material={materials.Material}
       />
-      <group rotation={[-Math.PI, 0, 0]} scale={-12.869}>
+      <group rotation={[-Math.PI, 0.07, 0]} scale={-12.869}>
         <group
           position={[0.983, 2.035, 0.506]}
           rotation={[-Math.PI, 0, 0]}
@@ -103,7 +103,7 @@ export function Phone({ children, ...props }) {
               castShadow
               receiveShadow
               geometry={nodes.Camera3_Lens001_0.geometry}
-              material={materials['Lens.001']}
+              material={materials["Lens.001"]}
             />
           </group>
           <group position={[2.608, -0.071, 0]} scale={0.678}>
@@ -316,7 +316,7 @@ export function Phone({ children, ...props }) {
         />
         <Html
           className="contentPhone"
-          position={[-0, -1.35, -0.08]}
+          position={[-0, -0.75, -0.08]}
           rotation={[0, 0, 0]}
           transform
           distanceFactor={3.2}
@@ -325,9 +325,9 @@ export function Phone({ children, ...props }) {
             className="wrapperPhone"
             onPointerDown={(e) => e.stopPropagation()}
             style={{
-              height: '844px',
-              width: '405px',
-              transformOrigin: 'top left',
+              height: "830px",
+              width: "403px",
+              transformOrigin: "top left",
             }}
           >
             {children}
@@ -353,4 +353,4 @@ export function Phone({ children, ...props }) {
   );
 }
 
-useGLTF.preload('/models/phone1.glb');
+useGLTF.preload("/models/phone1.glb");

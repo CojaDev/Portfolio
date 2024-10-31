@@ -1,12 +1,13 @@
-import Cursor from '@/components/Cursor';
-import Hero from '@/components/Hero';
-import Nav from '@/components/Nav';
-import Border from '@/components/Border';
-import About from '@/components/About';
-import Portfolio from '@/components/Portfolio';
-import MyStars from '@/components/Stars';
-import Contact from '@/components/Contact';
-import LoadingScreen from '@/components/LoadingScreen';
+import React, { Suspense, lazy } from "react";
+import Cursor from "@/components/Cursor";
+import Hero from "@/components/Hero";
+import Nav from "@/components/Nav";
+import Border from "@/components/Border";
+const About = lazy(() => import("@/components/About"));
+import Portfolio from "@/components/Portfolio";
+const Contact = lazy(() => import("@/components/Contact"));
+import MyStars from "@/components/Stars";
+import LoadingScreen from "@/components/LoadingScreen";
 
 export default function Home() {
   return (
@@ -16,12 +17,16 @@ export default function Home() {
         <MyStars count={3700} radius={60} />
       </div>
       <Border />
-      <Cursor color={'#FDBA74'} />
+      <Cursor color={"#FDBA74"} />
       <Nav />
       <Hero />
-      <About />
+      <Suspense fallback={<div>Loading...</div>}>
+        <About />
+      </Suspense>
       <Portfolio />
-      <Contact />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Contact />
+      </Suspense>
     </main>
   );
 }
