@@ -127,7 +127,7 @@ function ScrollableImage({ src, alt, isPhone }) {
   return (
     <div
       ref={containerRef}
-      className={`overflow-y-scroll overflow-x-hidden w-full h-full ${
+      className={`overflow-y-scroll select-none overflow-x-hidden w-full h-full ${
         isPhone ? "rounded-[10px]" : ""
       }`}
       onScroll={handleScroll}
@@ -138,6 +138,8 @@ function ScrollableImage({ src, alt, isPhone }) {
         alt={alt}
         className="w-full object-cover"
         width={400}
+        loading="eager"
+        draggable={false}
         height={1200}
       />
       <div

@@ -33,7 +33,7 @@ export const projects = [
   },
   {
     id: 2,
-    title: "Ecommerce Website with Admin Page",
+    title: "E-commerce Admin and Store System",
     description:
       "This comprehensive e-commerce solution encompasses two distinct interfaces: an intuitive online shop for customers and a robust admin panel for managing the business. The platform is designed to streamline the shopping experience while providing administrators with powerful tools for oversight and management.",
     technologies: [
@@ -109,8 +109,8 @@ export const projects = [
     monitorUrl: "https://amedia-five.vercel.app/",
     phoneUrl: "https://amedia-five.vercel.app/",
     imageUrl: "/img/websites/amedia.png",
-    mobileImg: "",
-    monitorImg: "",
+    mobileImg: "/img/websites/amediaMobile.png",
+    monitorImg: "/img/websites/amediaMonitor.png",
     onlyMobile: false,
   },
   {
