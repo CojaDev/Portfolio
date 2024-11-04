@@ -1,5 +1,6 @@
 "use client";
-import React, { Suspense, useRef, useState, useEffect } from "react";
+
+import React, { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { ContactShadows } from "@react-three/drei";
 import Monitor from "./Monitor";
@@ -26,8 +27,10 @@ import {
   SiCloudinary,
   SiExpo,
   SiNextdns,
+  SiClerk,
 } from "react-icons/si";
 import { TbBrandReactNative } from "react-icons/tb";
+import { GrDomain } from "react-icons/gr";
 
 const ICONS = {
   FaReact: <FaReact />,
@@ -47,7 +50,9 @@ const ICONS = {
   SiCloudinary: <SiCloudinary />,
   SiExpo: <SiExpo />,
   SiNextdns: <SiNextdns />,
+  SiClerk: <SiClerk />,
   TbBrandReactNative: <TbBrandReactNative />,
+  GrDomain: <GrDomain />,
 };
 
 function Model({ children }) {
@@ -83,6 +88,119 @@ function Model({ children }) {
   return <group ref={group}>{children}</group>;
 }
 
+function ScrollableImage({ src, alt, isPhone }) {
+  const containerRef = useRef(null);
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  const handleScroll = () => {
+    const container = containerRef.current;
+    if (container) {
+      const maxScroll = container.scrollHeight - container.clientHeight;
+      const newPosition = (container.scrollTop / maxScroll) * 100;
+      setScrollPosition(newPosition);
+    }
+  };
+
+  const handleWheel = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const container = containerRef.current;
+    if (container) {
+      if (isPhone) {
+        container.scrollTop += e.deltaY * 7;
+      } else container.scrollTop += e.deltaY * 10;
+    }
+  };
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener("wheel", handleWheel, { passive: false });
+    }
+    return () => {
+      if (container) {
+        container.removeEventListener("wheel", handleWheel);
+      }
+    };
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      className={`overflow-y-scroll overflow-x-hidden w-full h-full ${
+        isPhone ? "rounded-[10px]" : ""
+      }`}
+      onScroll={handleScroll}
+      style={{ scrollBehavior: "smooth" }}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        className="w-full object-cover"
+        width={400}
+        height={1200}
+      />
+      <div
+        className="absolute right-2 top-2 bottom-2 w-1 bg-gray-300 rounded"
+        style={{ opacity: scrollPosition > 0 ? 1 : 0 }}
+      >
+        <div
+          className="w-full bg-gray-600 rounded"
+          style={{
+            height: `${scrollPosition}%`,
+            transition: "height 0.1s",
+          }}
+        />
+      </div>
+    </div>
+  );
+}
+
+function ScrollableIframe({ src, title, isPhone }) {
+  const iframeRef = useRef(null);
+
+  const handleWheel = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const iframe = iframeRef.current;
+    if (iframe && iframe.contentWindow) {
+      iframe.contentWindow.postMessage(
+        {
+          type: "wheel",
+          deltaY: isPhone ? e.deltaY * 7 : e.deltaY * 10,
+        },
+        "*"
+      );
+    }
+  };
+
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (iframe) {
+      iframe.addEventListener("wheel", handleWheel, { passive: false });
+    }
+    return () => {
+      if (iframe) {
+        iframe.removeEventListener("wheel", handleWheel);
+      }
+    };
+  }, []);
+
+  return (
+    <iframe
+      ref={iframeRef}
+      src={src}
+      className={`w-full h-full select-none ${
+        isPhone ? "overflow-hidden rounded-[10px]" : ""
+      }`}
+      width={432}
+      height={768}
+      title={title}
+      style={{ border: "none" }}
+    />
+  );
+}
+
 export default function Portfolio() {
   const [scrollSpeed, setScrollSpeed] = useState("-0.2");
   const [scrollSpeed2, setScrollSpeed2] = useState("0.35");
@@ -113,7 +231,7 @@ export default function Portfolio() {
       {projects.map((project, index) => (
         <div
           key={project.id}
-          className={`flex w-full xl:flex-row flex-col items-center gap-2 my-10 relative `}
+          className={`flex w-full xl:flex-row flex-col items-center gap-2 my-10 relative`}
         >
           <div
             className={`xl:min-w-[40%] xl:w-[40%] w-full flex flex-col justify-center text-white p-6 ${
@@ -128,8 +246,7 @@ export default function Portfolio() {
               {project.title}
             </h2>
             <p
-              className={`text-lg opacity-85 sm:text-justify text-center sm:pr-16  pr-0
-              `}
+              className={`text-lg opacity-85 sm:text-justify text-center sm:pr-16 pr-0`}
             >
               {project.description}
             </p>
@@ -150,16 +267,14 @@ export default function Portfolio() {
                 rel="noopener noreferrer"
                 className="px-6 py-3 bg-orange-400 text-black font-medium text-center rounded-lg hover:bg-orange-300 transition"
               >
-                {project.onlyMobile === true
-                  ? "Visit GitHub Page"
-                  : "Visit Site"}
+                {project.onlyMobile ? "Visit GitHub Page" : "Visit Site"}
               </a>
-              {project.onlyMobile === false && (
+              {!project.onlyMobile && (
                 <a
                   href={project.gitHubLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-3  text-white/90 font-medium text-center rounded-lg transition hover:underline"
+                  className="px-4 py-3 text-white/90 font-medium text-center rounded-lg transition hover:underline"
                 >
                   GitHub Page
                 </a>
@@ -203,28 +318,38 @@ export default function Portfolio() {
                   <Model>
                     <group position={[-2, -2.3, 0]}>
                       <Monitor>
-                        <iframe
-                          src={project.monitorUrl}
-                          className="w-full h-full select-none"
-                          width={432}
-                          height={768}
-                          title={project.title}
-                          style={{ border: "none" }}
-                        ></iframe>
+                        {project.monitorImg ? (
+                          <ScrollableImage
+                            src={project.monitorImg}
+                            alt={project.title}
+                            isPhone={false}
+                          />
+                        ) : (
+                          <ScrollableIframe
+                            src={project.monitorUrl}
+                            title={project.title}
+                            isPhone={false}
+                          />
+                        )}
                       </Monitor>
                       <Phone
                         position={[4.6, 2.4, 3]}
                         rotation={[0, Math.PI, 0]}
                         scale={0.044}
                       >
-                        <iframe
-                          src={project.phoneUrl}
-                          className="w-full h-full select-none overflow-hidden"
-                          width={432}
-                          height={768}
-                          title={project.title}
-                          style={{ border: "none" }}
-                        ></iframe>
+                        {project.mobileImg ? (
+                          <ScrollableImage
+                            src={project.mobileImg}
+                            alt={project.title}
+                            isPhone={true}
+                          />
+                        ) : (
+                          <ScrollableIframe
+                            src={project.phoneUrl}
+                            title={project.title}
+                            isPhone={true}
+                          />
+                        )}
                       </Phone>
                     </group>
                   </Model>
