@@ -1,23 +1,23 @@
-'use client';
-import React, { useState, useEffect } from 'react';
+"use client";
+import React, { useState, useEffect } from "react";
 
 const Nav = () => {
   const nav = [
     {
-      name: 'Home',
-      link: '#hero',
+      name: "Home",
+      link: "#hero",
     },
     {
-      name: 'About',
-      link: '#about',
+      name: "About",
+      link: "#about",
     },
     {
-      name: 'Works',
-      link: '#works',
+      name: "Works",
+      link: "#works",
     },
     {
-      name: 'Contact',
-      link: '#contact',
+      name: "Contact",
+      link: "#contact",
     },
   ];
 
@@ -26,9 +26,9 @@ const Nav = () => {
 
   useEffect(() => {
     if (showNav) {
-      document.body.classList.add('no-scroll');
+      document.body.classList.add("no-scroll");
     } else {
-      document.body.classList.remove('no-scroll');
+      document.body.classList.remove("no-scroll");
     }
 
     const handleScroll = () => {
@@ -39,22 +39,22 @@ const Nav = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [showNav]);
 
   return (
     <nav
       className={`fixed z-50 text-white w-full py-5 transition-colors ${
-        scrolled ? 'bg-black/40' : 'bg-transparent'
+        scrolled ? "bg-black/40" : "bg-transparent"
       }`}
     >
       <div
         className={`justify-between lg:flex hidden p-4 pl-6  max-w-[1700px] mx-auto w-full transition-all ${
-          scrolled ? 'py-1' : 'py-11'
+          scrolled ? "py-0" : "py-11"
         } `}
       >
         <h2 className="text-[19px] my-auto">
@@ -78,7 +78,7 @@ const Nav = () => {
 
       <div
         className={`justify-between items-center transition-all lg:hidden flex p-8 relative ${
-          scrolled ? 'py-2' : 'py-8'
+          scrolled ? "py-2" : "py-8"
         }`}
       >
         <h2 className="text-[19px] z-40">
