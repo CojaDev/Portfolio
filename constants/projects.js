@@ -84,7 +84,7 @@ export const projects = [
     gitHubLink: "https://github.com/CojaDev/Restorani_Subotica2",
     monitorUrl: "https://restorani-subotica.vercel.app/",
     phoneUrl: "https://restorani-subotica.vercel.app/",
-    mobileImg: "/img/websites/restMobile.webp",
+    mobileImg: "/img/websites/restMobile.png",
     monitorImg: "/img/websites/resMonitor.webp",
     imageUrl: "/img/websites/res.png",
     onlyMobile: false,
