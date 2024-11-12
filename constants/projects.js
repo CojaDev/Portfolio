@@ -4,7 +4,7 @@ export const projects = [
     id: 1,
     title: "Tvoja Pomoć",
     description:
-      "This comprehensive e-commerce solution encompasses two distinct interfaces: an intuitive online shop for customers and a robust admin panel for managing the business. The platform is designed to streamline the shopping experience while providing administrators with powerful tools for oversight and management.",
+      "Tvoja Pomoć is an online platform that connects people in need of help with those offering their services. The goal is to make it easier to find helpers for various small jobs, from home repairs to yard work.",
     technologies: [
       { name: "HTML5", icon: "FaHtml5", color: "text-orange-600" },
       { name: "CSS3", icon: "FaCss3Alt", color: "text-blue-600" },
