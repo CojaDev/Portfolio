@@ -46,7 +46,6 @@ export default function RootLayout({ children }) {
           name="google-site-verification"
           content="PcVXkY3TbcO5DZLopYqYf5uz2Jgk8bEt2-W6E1Fzupw"
         />
-        <link rel="icon" href="https://fav.farm/🔥" />
       </head>
       <body className={poppins.className}>
         {children}
